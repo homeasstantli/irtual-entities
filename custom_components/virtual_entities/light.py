@@ -1,4 +1,4 @@
-from homeassistant.components.light import LightEntity
+from homeassistant.components.light import LightEntity, ColorMode
 
 LIGHTS = [
     ("My Light One", "my_light_one"),
@@ -25,6 +25,10 @@ class VirtualLight(LightEntity):
     def is_on(self): return self._state
     @property
     def should_poll(self): return False
+    @property
+    def color_mode(self): return ColorMode.ONOFF
+    @property
+    def supported_color_modes(self): return {ColorMode.ONOFF}
 
     async def async_turn_on(self, **kwargs):
         self._state = True
